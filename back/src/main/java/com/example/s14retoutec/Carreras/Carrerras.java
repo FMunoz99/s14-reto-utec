@@ -1,0 +1,5 @@
+package com.example.s14retoutec.Carreras;
+
+public enum Carrerras {
+    CS, DATA_SCIENCE, ING_AMBIENTAL, ING_MECATRONICA, ING_CIVIL, BIOINGENERIA, ING_QUIMICA, ING_INDUSTRIAL, ING_ENERGIA;
+}
