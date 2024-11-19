@@ -1,14 +1,7 @@
-import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
-import checker from "vite-plugin-checker";
-import tsconfigPaths from "vite-tsconfig-paths";  // Este es el primer plugin a cargar
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    tsconfigPaths(),  // Moverlo al principio
-    react(),
-    checker({
-      typescript: true,
-    }),
-  ],
-});
+  plugins: [react()],
+})
