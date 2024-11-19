@@ -28,7 +28,7 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 }));
 
 type historyRequest = {
-  anime_id: string;
+  nombre: string;
 };
 
 function EditarCurso() {
@@ -39,15 +39,15 @@ function EditarCurso() {
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const anime_id = (formData.get("anime_id") as string) || "";
+    const nombre = (formData.get("nombre") as string) || "";
 
     const request: historyRequest = {
-      anime_id
+      nombre
     };
 
     try{
       console.log(request);
-       const res = await axios.put("http://3.90.3.179:8000/api/user/history"
+       const res = await axios.put("http://3.90.3.179:8000/api/user/history",request
         
     );
     console.log("curso editado",res.data);
@@ -73,15 +73,10 @@ function EditarCurso() {
         <input
           className="outline rounded p-1"
           type="name"
-          placeholder="anime_id"
-          name="anime_id"
+          placeholder="nombre"
+          name="nombre"
         />
-        <input
-          className="outline rounded p-1"
-          type="name"
-          placeholder="status"
-          name="status"
-        />
+        
   
         <ColorButton 
           className="rounded bg-red-400 hover:bg-blue-300 p-1"

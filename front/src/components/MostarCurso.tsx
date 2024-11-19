@@ -1,5 +1,6 @@
 import axios from "axios";
-import useToken from "../hooks/useToken";
+import { useEffect, useState } from "react";
+import useToken  from "../hooks/useToken";
 import { useNavigate } from "react-router-dom";
 
 import Grid from '@mui/material/Grid2';
@@ -27,34 +28,33 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-type historyRequest = {
-  anime_id: string;
+type GetRequest = {
+  id: string;
 };
 
 function MostarCurso() {
-  const { token } = useToken();
+  // const { token } = useToken();
   
   document.title = 'mostrar';
+  const [message, setMessage] = useState(null);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const anime_id = (formData.get("anime_id") as string) || "";
+    const id = (formData.get("id") as string) || "";
 
-    const request: historyRequest = {
-      anime_id
+    const request: GetRequest = {
+      id
     };
 
     try{
       console.log(request);
-       const res = await axios.delete("http://3.90.3.179:8000/api/user/history", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-    });
-    console.log("historial borrado",res.data);
+       const res = await axios.get("http://3.90.3.179:8000/api/utec/curso", request 
+    );
+    console.log("datos obtenidos",res.data);
+    setMessage(res.data);
     }catch(error){
-        console.log("error en borrar en historial",error)
+        console.log("error en GET",error)
       }
 
   }
@@ -66,7 +66,7 @@ function MostarCurso() {
   >
   <Item>
   
-  <h1 className="p-3 text-red-50 selection:text-red-50 font-semibold text-3xl"> borrar dato del historial</h1>
+  <h1 className="p-3 text-red-50 selection:text-red-50 font-semibold text-3xl">Mostar datos</h1>
   <form
         onSubmit={handleSubmit}
         
@@ -75,15 +75,10 @@ function MostarCurso() {
         <input
           className="outline rounded p-1"
           type="name"
-          placeholder="anime_id"
-          name="anime_id"
+          placeholder="id"
+          name="id"
         />
-        <input
-          className="outline rounded p-1"
-          type="name"
-          placeholder="status"
-          name="status"
-        />
+        
   
         <ColorButton 
           className="rounded bg-red-400 hover:bg-blue-300 p-1"
@@ -98,7 +93,7 @@ function MostarCurso() {
   <Grid size={6}>
   <Item>2</Item>
   </Grid>
-  
+  message
   </Grid>
   </>
   );

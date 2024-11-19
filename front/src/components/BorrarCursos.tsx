@@ -27,8 +27,8 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-type historyRequest = {
-  anime_id: string;
+type borrarRequest = {
+  id: string;
 };
 
 function AñadirHistorial() {
@@ -39,21 +39,21 @@ function AñadirHistorial() {
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const anime_id = (formData.get("anime_id") as string) || "";
+    const id = (formData.get("id") as string) || "";
 
-    const request: historyRequest = {
-      anime_id
+    const request: borrarRequest = {
+      id
     };
 
     try{
       console.log(request);
-       const res = await axios.delete("http://3.90.3.179:8000/api/user/history", {
+       const res = await axios.delete("http://3.90.3.179:8000/api/utec/curso",request 
 
        
-    });
-    console.log("historial borrado",res.data);
+    );
+    console.log("curso borrado",res.data);
     }catch(error){
-        console.log("error en borrar en historial",error)
+        console.log("error en borrar",error)
       }
 
   }
@@ -73,16 +73,11 @@ function AñadirHistorial() {
       >
         <input
           className="outline rounded p-1"
-          type="name"
-          placeholder="anime_id"
-          name="anime_id"
+          type="id"
+          placeholder="id"
+          name="id"
         />
-        <input
-          className="outline rounded p-1"
-          type="name"
-          placeholder="status"
-          name="status"
-        />
+        
   
         <ColorButton 
           className="rounded bg-red-400 hover:bg-blue-300 p-1"

@@ -86,7 +86,7 @@ function AgregarFavoritos() {
           type="submit"
           variant="contained"
         >
-          añadir favorito
+          añadir curso
         </ColorButton >
       </form>
   </Item>
